@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
 import com.isoftstone.finance.managesystem.common.exception.EntityOperateException;
@@ -40,6 +41,11 @@ public class AccountController extends BaseController {
 	@Autowired
     @Qualifier("AccountService")
     private IAccountService accountService;
+
+	//@RequestMapping(value="/index")
+	//public String index(HttpServletRequest request, HttpServletResponse response){
+	//	return "account/login";
+	//}
 	
 	@RequestMapping(value="/login", method = {RequestMethod.GET})
     public String login(Model model){

@@ -37,6 +37,8 @@
     <import resource="spring-druid.xml" />
     <!-- 引入jdbc模板文件jdbcTemplate -->
     <import resource="spring-jdbc.xml" />
+    <!-- 引入cxf模板文件jdbcTemplate -->
+    <import resource="spring-cxf-service.xml" />
 
     <!-- 扫描注解Repository -->
   	<!-- use-default-filters="false" 只扫描指定的注解 -->
