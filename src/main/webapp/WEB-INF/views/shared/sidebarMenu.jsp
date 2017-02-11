@@ -60,12 +60,12 @@
    			</li>
    </c:forEach>
    
-   <li class="last">
+   <!--<li class="last">
       <a href="login.html">
       <i class="icon-off"></i> 
       <span class="title">注销登录</span>
       </a>
-   </li>
+   </li>-->
 </ul>
 <!-- END SIDEBAR MENU -->
 </div>

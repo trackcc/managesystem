@@ -2,7 +2,7 @@
 <!-- BEGIN FOOTER -->
 <div class="footer">
    <div class="footer-inner">
-      2013 &copy; Conquer by keenthemes.
+      Copyright 2017 by zwxiao
    </div>
    <div class="footer-tools">
       <span class="go-top">

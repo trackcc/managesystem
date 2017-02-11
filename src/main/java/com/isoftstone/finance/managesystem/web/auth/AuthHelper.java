@@ -7,6 +7,10 @@ public class AuthHelper {
 	public static void setSessionAccountAuth(HttpServletRequest request, AccountAuth accountAuth){
 		request.getSession().setAttribute("accountAuth", accountAuth);
 	}
+
+	public static void destroySessionAccountAuth(HttpServletRequest request, AccountAuth accountAuth){
+		request.getSession().removeAttribute("accountAuth");
+	}
 	
 	public static AccountAuth getSessionAccountAuth(HttpServletRequest request){
 		return (AccountAuth)request.getSession().getAttribute("accountAuth");

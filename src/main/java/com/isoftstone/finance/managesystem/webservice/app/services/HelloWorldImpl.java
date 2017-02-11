@@ -9,6 +9,6 @@ public class HelloWorldImpl implements IHelloWorld {
         @Override  
         public String sayHello(String username) {  
                
-            return "Hello world!!! " + username;
+            return "Hello world" + username;
         }  
     }

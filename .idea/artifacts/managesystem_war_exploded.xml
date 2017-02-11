@@ -77,6 +77,7 @@
           <element id="library" level="project" name="Maven: org.apache.cxf:cxf-rt-ws-policy:3.1.9" />
           <element id="library" level="project" name="Maven: org.apache.neethi:neethi:3.0.3" />
           <element id="library" level="project" name="Maven: org.apache.cxf:cxf-rt-transports-http:3.1.9" />
+          <element id="library" level="project" name="Maven: org.freemarker:freemarker:2.3.23" />
         </element>
       </element>
       <element id="directory" name="META-INF">

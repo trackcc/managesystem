@@ -12,6 +12,7 @@ import com.isoftstone.finance.managesystem.common.exception.EntityOperateExcepti
 import com.isoftstone.finance.managesystem.common.exception.ValidatException;
 import com.isoftstone.finance.managesystem.common.extension.StringHelper;
 import com.isoftstone.finance.managesystem.common.utilities.PageListUtil;
+import com.isoftstone.finance.managesystem.config.ConfigHelper;
 import com.isoftstone.finance.managesystem.model.models.Account;
 import com.isoftstone.finance.managesystem.model.models.Authority;
 import com.isoftstone.finance.managesystem.service.interfaces.IAccountService;
@@ -29,12 +30,10 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.ServletRequestUtils;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
+//@SessionAttributes("projectName")
 @RequestMapping(value = "/account")
 public class AccountController extends BaseController {  
 	
@@ -46,19 +45,22 @@ public class AccountController extends BaseController {
 	//public String index(HttpServletRequest request, HttpServletResponse response){
 	//	return "account/login";
 	//}
-	
 	@RequestMapping(value="/login", method = {RequestMethod.GET})
-    public String login(Model model){
-		if(!model.containsAttribute("contentModel"))
-            model.addAttribute("contentModel", new AccountLoginModel());
-        return "account/login";
+    public String login(HttpServletRequest request,Model model){
+		System.out.println("==================get=================");
+		if(!model.containsAttribute("contentModel")){
+			model.addAttribute("contentModel", new AccountLoginModel());
+		}
+		request.getSession().setAttribute("projectName", ConfigHelper.getProjectName());
+//		model.addAttribute("projectName", "项目名称");
+		return "account/login";
     }
 	
 	@RequestMapping(value="/login", method = {RequestMethod.POST})
 	public String login(HttpServletRequest request, Model model, @Valid @ModelAttribute("contentModel") AccountLoginModel accountLoginModel, BindingResult result) throws ValidatException, EntityOperateException, NoSuchAlgorithmException{
 		//如果有验证错误 返回到form页面
         if(result.hasErrors())
-            return login(model);
+            return login(request,model);
         Account account=accountService.login(accountLoginModel.getUsername().trim(), accountLoginModel.getPassword().trim());
         if(account==null || account.getEnable()==false || account.getRole()==null){
         	if(account==null){
@@ -69,7 +71,7 @@ public class AccountController extends BaseController {
         		result.addError(new FieldError("contentModel","username","此用户被禁用，不能登录。"));
         	else
         		result.addError(new FieldError("contentModel","username","此用户当前未被授权，不能登录。"));
-            return login(model);
+            return login(request,model);
         }
         else{
         	AccountAuth accountAuth=new AccountAuth(account.getId(), account.getName(), account.getUsername());
@@ -115,7 +117,7 @@ public class AccountController extends BaseController {
         String returnUrl = ServletRequestUtils.getStringParameter(request, "returnUrl", null);
         if(returnUrl==null)
         	returnUrl="/home/index";
-    	return "redirect:"+returnUrl; 	
+    	return "redirect:"+returnUrl;
 	}
 	
 	@RequestMapping(value="/register", method = {RequestMethod.GET})

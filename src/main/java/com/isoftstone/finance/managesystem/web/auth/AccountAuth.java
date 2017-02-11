@@ -1,5 +1,7 @@
 package com.isoftstone.finance.managesystem.web.auth;
 
+import com.isoftstone.finance.managesystem.model.models.Account;
+
 public class AccountAuth {
 	
 	private Integer id;
@@ -11,6 +13,12 @@ public class AccountAuth {
 		this.id=id;
 		this.name=name;
 		this.username=username;
+	}
+
+	public AccountAuth(Account account){
+		this.id=account.getId();
+		this.name=account.getName();
+		this.username=account.getUsername();
 	}
 	
 	public void setId(Integer id){
